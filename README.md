@@ -3,7 +3,9 @@ Create a mini desktop app to retrieve the contributor counts for each repositori
 
 In order to run the application sucessfully, please install the necessary packages/libraries in requirements.txt. It is recommended to run the app in virtual environment to isolate the dependencies from others, you can run:
 > python3 -m venv .venv
+> 
 > source .venv/bin/activate #Activate the virtual environment
+> 
 > pip3 install [package]
 
 To run the app:
