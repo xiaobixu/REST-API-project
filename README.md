@@ -8,6 +8,8 @@ In order to run the application sucessfully, please install the necessary packag
 > 
 > pip3 install [package]
 
+*Note: Sometimes the tkinter could not work while installed via pip3. In my case, I have to install it via other tools.I am working on iMac,and I install tkinter via brew (brew install python3-tk). See: https://stackoverflow.com/questions/4783810/install-tkinter-for-python
+
 To run the app:
 > python application.py
 
