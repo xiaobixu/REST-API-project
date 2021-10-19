@@ -9,6 +9,12 @@ import os
 #Define variable to hold the results
 results ={}
 
+#Sorting dictionary by contributor counts in descending order
+def sort_dic(dic):
+    #Sort the dictionary by values in descending order
+    sorted_dic = sorted(dic.items(), key = lambda kv: kv[1], reverse=True) 
+    return sorted_dic
+
 #Define the function to retrieve each repository's contributor counts, given the owner's name
 def get_contributor(owner,git_user,git_token):
     url = "https://api.github.com/users/{username}/repos".format(username =owner)
@@ -24,19 +30,18 @@ def get_contributor(owner,git_user,git_token):
         contri_url = item["contributors_url"] #Get the url to the contributors' information
         contributors = requests.get(contri_url,auth=(git_user,git_token)).json()
         repo_contributors[item['name']] = len(contributors)
-    return repo_contributors
+    sorted_repos = sort_dic(repo_contributors)
+    return sorted_repos
 
 def myClick():
     T.delete("1.0", tk.END) #Clear the previous results
     print("Processing... Please wait :)") #Adding waiting status
     results = get_contributor(entry_owner.get(),entry_user.get(),entry_token.get()) 
-    result = results.items()
     T.delete("1.0", tk.END) #Clear the waiting status
-    T.insert(tk.INSERT, "Contributor count for each repository:\n")
-    for item in result:
-        T.insert(tk.INSERT, "{repo} : {number}\n".format(repo=item[0],number=item[1]))
-    print("That is all!")
-    
+    T.insert(tk.INSERT, "Contributor count for each repository (sorted in descending order by contributor counts:\n")
+    for i in results:
+        T.insert(tk.INSERT, "{repo} : {number}\n".format(repo=i[0],number=i[1]))
+    print("That is all")
 
 #Create GUI with tkinter
 
