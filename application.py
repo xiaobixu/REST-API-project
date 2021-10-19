@@ -33,49 +33,53 @@ def get_contributor(owner,git_user,git_token):
     sorted_repos = sort_dic(repo_contributors)
     return sorted_repos
 
-def myClick():
-    T.delete("1.0", tk.END) #Clear the previous results
-    print("Processing... Please wait :)") #Adding waiting status
-    results = get_contributor(entry_owner.get(),entry_user.get(),entry_token.get()) 
-    T.delete("1.0", tk.END) #Clear the waiting status
-    T.insert(tk.INSERT, "Contributor count for each repository (sorted in descending order by contributor counts:\n")
-    for i in results:
-        T.insert(tk.INSERT, "{repo} : {number}\n".format(repo=i[0],number=i[1]))
-    print("That is all")
 
-#Create GUI with tkinter
 
-#Create main window and the title
-window = tk.Tk()
-window.title("Welcome to GitHub Repository Analysis app!")
+def main():    
+    def myClick():
+        T.delete("1.0", tk.END) #Clear the previous results
+        print("Processing... Please wait :)") #Adding waiting status
+        results = get_contributor(entry_owner.get(),entry_user.get(),entry_token.get()) 
+        T.delete("1.0", tk.END) #Clear the waiting status
+        T.insert(tk.INSERT, "Contributor count for each repository (sorted in descending order by contributor counts:\n")
+        for i in results:
+            T.insert(tk.INSERT, "{repo} : {number}\n".format(repo=i[0],number=i[1]))
+        print("That is all")
+    
+    #Create main window and the title
+    window = tk.Tk()
+    window.title("Welcome to GitHub Repository Analysis app!")
 
-#Create label and entry widget for owner input
-lbl1 =tk.Label(window, text="Enter the owner name that you are interested (e.g. PowerShell):")
-lbl1.grid(row=0, column=0)
+    #Create label and entry widget for owner input
+    lbl1 =tk.Label(window, text="Enter the owner name that you are interested (e.g. PowerShell):")
+    lbl1.grid(row=0, column=0)
 
-entry_owner = tk.Entry(window, fg="black", bg="white", width=80)
-entry_owner.grid(row=0, column=1)
+    entry_owner = tk.Entry(window, fg="black", bg="white", width=80)
+    entry_owner.grid(row=0, column=1)
 
-#Create label and entry widget for authentication token
-lbl2 =tk.Label(window, text="Enter your own GitHub username for authentication:")
-lbl2.grid(row=1, column=0)
+    #Create label and entry widget for authentication token
+    lbl2 =tk.Label(window, text="Enter your own GitHub username for authentication:")
+    lbl2.grid(row=1, column=0)
 
-entry_user = tk.Entry(window, fg="black", bg="white", width=80)
-entry_user.grid(row=1,column=1)
+    entry_user = tk.Entry(window, fg="black", bg="white", width=80)
+    entry_user.grid(row=1,column=1)
 
-#Create label and entry widget for username input for authentication use
-lbl3 =tk.Label(window, text="Enter your own git token key:")
-lbl3.grid(row=2, column=0) 
+    #Create label and entry widget for username input for authentication use
+    lbl3 =tk.Label(window, text="Enter your own git token key:")
+    lbl3.grid(row=2, column=0) 
 
-entry_token = tk.Entry(window, fg="black", bg="white", width=80)
-entry_token.grid(row=2, column=1)
+    entry_token = tk.Entry(window, fg="black", bg="white", width=80)
+    entry_token.grid(row=2, column=1)
 
-#Create Search button widget and define size and action
-btn = tk.Button(window, text="Search", padx=10, pady=5, fg="white", command=myClick)
-btn.grid(row=3, columnspan=2)
+    #Create Search button widget and define size and action
+    btn = tk.Button(window, text="Search", padx=10, pady=5, fg="white", command=myClick)
+    btn.grid(row=3, columnspan=2)
 
-#Create text widget and specify size
-T = tk.Text(window, height=50, width=50, bg="#263D42", fg="white")
-T.grid(row=4, columnspan=2)
+    #Create text widget and specify size
+    T = tk.Text(window, height=50, width=50, bg="#263D42", fg="white")
+    T.grid(row=4, columnspan=2)
 
-window.mainloop()
+    window.mainloop()
+
+if __name__ == "__main__":
+    main()
