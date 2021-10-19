@@ -1,5 +1,5 @@
 # REST-API-project
-Create a mini desktop app using Github REST API(https://docs.github.com/en/rest) to retrieve the contributor counts for each repositories, given the owner username
+Create a mini desktop app using Github REST API(https://docs.github.com/en/rest) to retrieve the contributor counts for each repositories, given the owner usernames. Repository names are sorted by contributor counts in descending order.
 
 In order to run the application sucessfully, please install the necessary packages/libraries in requirements.txt. It is recommended to run the app in virtual environment to isolate the dependencies from others, you can run:
 > python3 -m venv .venv
