@@ -27,13 +27,16 @@ def get_contributor(owner,git_user,git_token):
     return repo_contributors
 
 def myClick():
-    T.delete("1.0", tk.END) #Clear the previous results 
-    results = get_contributor(entry_owner.get(),entry_user.get(),entry_token.get())
+    T.delete("1.0", tk.END) #Clear the previous results
+    print("Processing... Please wait :)") #Adding waiting status
+    results = get_contributor(entry_owner.get(),entry_user.get(),entry_token.get()) 
     result = results.items()
+    T.delete("1.0", tk.END) #Clear the waiting status
     T.insert(tk.INSERT, "Contributor count for each repository:\n")
     for item in result:
         T.insert(tk.INSERT, "{repo} : {number}\n".format(repo=item[0],number=item[1]))
-    T.insert(tk.END, "That is all!")
+    print("That is all!")
+    
 
 #Create GUI with tkinter
 
@@ -62,12 +65,12 @@ lbl3.grid(row=2, column=0)
 entry_token = tk.Entry(window, fg="black", bg="white", width=80)
 entry_token.grid(row=2, column=1)
 
-#Create button widget and define size and action
+#Create Search button widget and define size and action
 btn = tk.Button(window, text="Search", padx=10, pady=5, fg="white", command=myClick)
 btn.grid(row=3, columnspan=2)
 
 #Create text widget and specify size
-T = tk.Text(window, height=50, width=50,bg="#263D42")
+T = tk.Text(window, height=50, width=50, bg="#263D42", fg="white")
 T.grid(row=4, columnspan=2)
 
 window.mainloop()
